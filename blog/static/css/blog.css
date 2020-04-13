@@ -1,0 +1,29 @@
+
+body {
+    background-color: slategrey;
+}
+
+.page-header {
+    background-color: #ff9400;
+    padding: 20px;
+    padding-left: 40px;
+}
+
+.page-header a {
+    color: white;
+    outline: none;
+    text-decoration: none;
+}
+
+.date {
+    color: #343a40;
+}
+
+.post p, .post a{
+    color: black;
+}
+
+.post a {
+    outline: none;
+    text-decoration: none;
+}
