@@ -13,6 +13,7 @@ body {
     color: white;
     outline: none;
     text-decoration: none;
+    display: flex;
 }
 
 .content {
@@ -47,4 +48,13 @@ body {
 
 .post-form-blog button {
     float: right;
+}
+
+.top-menu {
+    color: white;
+    float: right;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px
+
 }

@@ -19,13 +19,24 @@ def detail_view(request, pk):
 
     return render(request, 'blog/post_detail.html', stuff_for_frontend)
 
-def post_edit_view(request, pk=None):
-    post = Post.objects.filter(pk=pk).first()
+def post_create_view(request):
     if request.method == 'POST':
-        if post:
-            form = PostForm(request.POST, instance=post)
-        else:
-            form = PostForm(request.POST)
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('blog:post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+        stuff_for_frontend = {'form': form}
+    return render(request, 'blog/post_edit.html', stuff_for_frontend)
+
+def post_edit_view(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -34,9 +45,6 @@ def post_edit_view(request, pk=None):
             return redirect('blog:post_detail', pk=post.pk)
 
     else:
-        if post:
-            form = PostForm(instance=post)
-        else:
-            form = PostForm()
+        form = PostForm(instance=post)
         stuff_for_frontend = {'form': form}
-    return render(request, 'blog/post_edit.html', stuff_for_frontend)
+        return render(request, 'blog/post_edit.html', stuff_for_frontend)
