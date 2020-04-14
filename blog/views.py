@@ -19,17 +19,24 @@ def detail_view(request, pk):
 
     return render(request, 'blog/post_detail.html', stuff_for_frontend)
 
-def edit_view(request):
+def post_edit_view(request, pk=None):
+    post = Post.objects.filter(pk=pk).first()
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        if post:
+            form = PostForm(request.POST, instance=post)
+        else:
+            form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
             return redirect('blog:post_detail', pk=post.pk)
-    else:
 
-        form = PostForm()
+    else:
+        if post:
+            form = PostForm(instance=post)
+        else:
+            form = PostForm()
         stuff_for_frontend = {'form': form}
     return render(request, 'blog/post_edit.html', stuff_for_frontend)
