@@ -1,7 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .models import Post
+from .forms import PostForm
 # Create your views here.
 
 def post_list(request):
@@ -17,3 +18,18 @@ def detail_view(request, pk):
     stuff_for_frontend = {'post': post}
 
     return render(request, 'blog/post_detail.html', stuff_for_frontend)
+
+def edit_view(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('blog:post_detail', pk=post.pk)
+    else:
+
+        form = PostForm()
+        stuff_for_frontend = {'form': form}
+    return render(request, 'blog/post_edit.html', stuff_for_frontend)

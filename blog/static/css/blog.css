@@ -36,3 +36,15 @@ body {
     outline: none;
     text-decoration: none;
 }
+
+.post-form-blog {
+    width: 450px;
+}
+
+.post-form-blog textarea {
+    width: 100%;
+}
+
+.post-form-blog button {
+    float: right;
+}
