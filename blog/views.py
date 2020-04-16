@@ -25,7 +25,7 @@ def post_create_view(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('blog:post_detail', pk=post.pk)
     else:
@@ -40,7 +40,7 @@ def post_edit_view(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('blog:post_detail', pk=post.pk)
 
@@ -48,3 +48,17 @@ def post_edit_view(request, pk):
         form = PostForm(instance=post)
         stuff_for_frontend = {'form': form}
         return render(request, 'blog/post_edit.html', stuff_for_frontend)
+
+def post_draft_view(request):
+    """Shows the posts having null as published date"""
+
+    posts = Post.objects.filter(published_date__isnull=True).order_by('-created_date')
+
+    stuff_for_frontend = {'posts': posts}
+    return render(request, 'blog/post_draft_list.html', stuff_for_frontend)
+
+def post_publish(request, pk):
+    """Publishing a draft"""
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('blog:post_detail', pk=pk)
