@@ -1,0 +1,62 @@
+
+body {
+    background-color: slategrey;
+}
+
+.page-header {
+    background-color: #ff9400;
+    padding: 20px;
+    padding-left: 40px;
+}
+
+.page-header a {
+    color: white;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+}
+
+.content {
+    margin-left: 40px;
+}
+
+.date {
+    color: #343a40;
+}
+
+.post {
+    margin: 20px;
+    margin-bottom: 70px;
+}
+
+.post p, .post a{
+    color: black;
+}
+
+.post a {
+    outline: none;
+    text-decoration: none;
+}
+
+.post-form-blog {
+    width: 450px;
+}
+
+.post-form-blog textarea {
+    width: 100%;
+}
+
+.post-form-blog button {
+    float: right;
+}
+
+.top-menu {
+    color: white;
+    float: right;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+
+}
