@@ -89,3 +89,9 @@ def comment_remove_view(request, pk):
     comment.delete()
 
     return redirect('blog:post_detail', pk=comment.post.pk)
+
+def comment_approve(request, pk):
+    """Approveseach comment"""
+    comment= get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('blog:post_detail', pk=comment.post.pk)
