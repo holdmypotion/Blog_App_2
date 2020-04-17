@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'blog:post_list'
+
+LOGOUT_REDIRECT_URL = 'blog:post_list'
 
 # Application definition
 
@@ -55,7 +58,7 @@ ROOT_URLCONF = 'blog_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
