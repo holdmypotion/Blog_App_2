@@ -14,11 +14,7 @@
 <body>
 	<div class="page-header">
 		{% if user.is_authenticated %}
-<<<<<<< HEAD
 			<p class="top-menu" style="font-size: 1.2em; font-weight: bold;">Hello, {{ user.username }}<small><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a></small></p>
-=======
-			<p class="top-menu" style="font-size: 1.2em; font-weight: bold;">Hello {{ user.username }}<small><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a></small></p>
->>>>>>> step_4_login
 			<a href="{% url 'blog:post_draft_list' %}"class="top-menu"><i class="fab fa-firstdraft fa-2x"></i></a>
 			<a href="{% url 'blog:post_create' %}"class="top-menu"><i class="fa fa-plus fa-2x"></i></a>
 		{% else %}
