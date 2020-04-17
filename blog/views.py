@@ -84,12 +84,15 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
 
     return render(request, 'blog/add_comment.html', {'form': form})
+
+@login_required
 def comment_remove_view(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
 
     return redirect('blog:post_detail', pk=comment.post.pk)
 
+@login_required
 def comment_approve(request, pk):
     """Approveseach comment"""
     comment= get_object_or_404(Comment, pk=pk)
