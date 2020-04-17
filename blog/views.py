@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from .models import Post
 from .forms import PostForm
@@ -19,6 +20,7 @@ def detail_view(request, pk):
 
     return render(request, 'blog/post_detail.html', stuff_for_frontend)
 
+@login_required
 def post_create_view(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -33,6 +35,7 @@ def post_create_view(request):
         stuff_for_frontend = {'form': form}
     return render(request, 'blog/post_edit.html', stuff_for_frontend)
 
+@login_required
 def post_edit_view(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
@@ -46,9 +49,10 @@ def post_edit_view(request, pk):
 
     else:
         form = PostForm(instance=post)
-        stuff_for_frontend = {'form': form}
+        stuff_for_frontend = {'form': form, 'post': post}
         return render(request, 'blog/post_edit.html', stuff_for_frontend)
 
+@login_required
 def post_draft_view(request):
     """Shows the posts having null as published date"""
 
@@ -57,6 +61,7 @@ def post_draft_view(request):
     stuff_for_frontend = {'posts': posts}
     return render(request, 'blog/post_draft_list.html', stuff_for_frontend)
 
+@login_required
 def post_publish(request, pk):
     """Publishing a draft"""
     post = get_object_or_404(Post, pk=pk)
