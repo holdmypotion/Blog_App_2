@@ -14,4 +14,5 @@ urlpatterns = [
     path('drafts/', views.post_draft_view, name='post_draft_list'),
     path('post/<int:pk>/publish', views.post_publish, name='post_publish'),
     path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment'),
+    path('comment/<int:pk>/remove', views.comment_remove_view, name='remove_comment'),
 ]
