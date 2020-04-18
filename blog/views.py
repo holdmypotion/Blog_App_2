@@ -62,6 +62,12 @@ def post_draft_view(request):
     return render(request, 'blog/post_draft_list.html', stuff_for_frontend)
 
 @login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('/', pk=post.pk)
+
+@login_required
 def post_publish(request, pk):
     """Publishing a draft"""
     post = get_object_or_404(Post, pk=pk)

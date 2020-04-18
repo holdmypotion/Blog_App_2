@@ -16,6 +16,8 @@
         {% endif %}
 		{% if user.is_authenticated %}
             <a href="{% url 'blog:post_edit' pk=post.pk %}"><i class="fas fa-pen-square fa-2x" style="color: peachpuff"></i></a>
+            <a href="{% url 'blog:post_delete' pk=post.pk %}" class="btn btn-danger"
+               onclick="return confirm('Are you sure you eant to delete this post?')"><i class="fas fa-eraser"></i></a>
         {% endif %}
         <h1>{{ post.title }}</h1>
         <p>{{ post.text| markdown | safe | linebreaksbr }}</p>
